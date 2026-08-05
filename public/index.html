@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Rekap Kuota — Burn Kuota per City</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="tape" aria-hidden="true"></div>
+
+  <main class="wrap">
+    <header class="head">
+      <span class="eyebrow">GOOGLE SHEETS → EXCEL</span>
+      <h1>Rekap Burn Kuota <span class="accent">per City</span></h1>
+      <p class="sub">Pilih rentang sheet yang mau direkap, sistem akan gabungkan datanya per CITY jadi satu file Excel.</p>
+    </header>
+
+    <section class="card" id="step-source">
+      <div class="step-label">01 — Sumber data</div>
+      <label class="field">
+        <span>Link atau ID Google Spreadsheet</span>
+        <input type="text" id="sheetUrl" placeholder="https://docs.google.com/spreadsheets/d/..." autocomplete="off" />
+      </label>
+      <button class="btn btn-primary" id="btnLoadSheets">Muat daftar sheet</button>
+      <p class="hint" id="loadHint">Kosongkan untuk pakai SHEET_URL dari file .env. Link ini dipakai untuk kedua mode di bawah.</p>
+    </section>
+
+    <!-- TAB SWITCHER: pilih mau REKAP DATA atau CEK KUOTA, keduanya pakai sheetUrl yang sama di atas -->
+    <nav class="tabs" id="modeTabs" hidden>
+      <button class="tab-btn active" data-mode="rekap" type="button">Rekap Data</button>
+      <button class="tab-btn" data-mode="kuota" type="button">Cek Kuota</button>
+    </nav>
+
+    <!-- MODE: REKAP DATA -->
+    <section class="card mode-panel" id="step-range" data-mode="rekap" hidden>
+      <div class="step-label">02 — Rentang sheet</div>
+      <div class="range-row">
+        <label class="field">
+          <span>Dari sheet</span>
+          <select id="startSheet"></select>
+        </label>
+        <div class="range-arrow">→</div>
+        <label class="field">
+          <span>Sampai sheet</span>
+          <select id="endSheet"></select>
+        </label>
+      </div>
+      <div id="tapePreview" class="tape-preview"></div>
+      <button class="btn btn-primary" id="btnExport">Export ke Excel</button>
+      <p class="hint">File akan otomatis ter-download, dan juga tersimpan di folder <code>Hasil-Rekap</code> di server.</p>
+    </section>
+
+    <section class="card mode-panel" id="step-log" data-mode="rekap" hidden>
+      <div class="step-label">03 — Hasil</div>
+      <div id="summaryBox"></div>
+      <details class="log-details">
+        <summary>Lihat log proses</summary>
+        <pre id="logBox"></pre>
+      </details>
+    </section>
+
+    <!-- MODE: CEK KUOTA -->
+    <section class="card mode-panel" id="step-kuota-range" data-mode="kuota" hidden>
+      <div class="step-label">02 — Rentang sheet</div>
+      <div class="range-row">
+        <label class="field">
+          <span>Dari sheet</span>
+          <select id="startSheetKuota"></select>
+        </label>
+        <div class="range-arrow">→</div>
+        <label class="field">
+          <span>Sampai sheet</span>
+          <select id="endSheetKuota"></select>
+        </label>
+      </div>
+      <button class="btn btn-primary" id="btnCekKuota">Jalankan Cek Kuota</button>
+      <p class="hint">Sistem akan buka tiap "Link Cek Kuota", baca sisa kuota nasional, lalu isi otomatis ke kolom <code>Remaining Quota</code> langsung di spreadsheet. Sheet wajib punya kolom <code>MSISDN</code>, <code>Link Cek Kuota</code>, dan <code>Remaining Quota</code>. Proses ini bisa memakan waktu cukup lama tergantung jumlah baris.</p>
+    </section>
+
+    <section class="card mode-panel" id="step-kuota-log" data-mode="kuota" hidden>
+      <div class="step-label">03 — Hasil</div>
+      <div id="kuotaSummaryBox"></div>
+      <details class="log-details">
+        <summary>Lihat log proses</summary>
+        <pre id="kuotaLogBox"></pre>
+      </details>
+    </section>
+
+    <div class="status" id="status" role="status" aria-live="polite"></div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

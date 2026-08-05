@@ -1,0 +1,16 @@
+{
+  "name": "rekap-data-web",
+  "version": "1.0.0",
+  "description": "Web app untuk rekap Burn Kuota per CITY dari Google Sheets, dengan pilihan rentang sheet (dari - sampai) via UI.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "exceljs": "^4.4.0",
+    "express": "^4.19.2",
+    "googleapis": "^140.0.1",
+    "puppeteer": "^25.5.0"
+  }
+}

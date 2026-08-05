@@ -1,0 +1,290 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --bg: #0B1116;
+  --panel: #121A22;
+  --panel-2: #17212B;
+  --line: #253039;
+  --text: #E7EEF3;
+  --muted: #8496A3;
+  --accent: #35D8BE;
+  --accent-dim: #1E7A6C;
+  --warn: #F2A63A;
+  --radius: 10px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', system-ui, sans-serif;
+  min-height: 100vh;
+}
+
+/* SIGNATURE ELEMENT: strip "tape" di atas halaman, meniru pita reel data/kaset */
+.tape {
+  height: 10px;
+  width: 100%;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--panel-2) 0px, var(--panel-2) 14px,
+    var(--accent-dim) 14px, var(--accent-dim) 16px
+  );
+  border-bottom: 1px solid var(--line);
+}
+
+.wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+}
+
+.head { margin-bottom: 36px; }
+
+.eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+}
+
+h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1.15;
+  margin: 10px 0 12px;
+}
+
+h1 .accent { color: var(--accent); }
+
+.sub {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.5;
+  max-width: 46ch;
+  margin: 0;
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+/* TAB SWITCHER: pilih mode Rekap Data / Cek Kuota */
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 12px 16px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  color: var(--muted);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.tab-btn:hover {
+  color: var(--text);
+  border-color: var(--accent-dim);
+}
+
+.tab-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
+}
+
+.step-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  margin-bottom: 16px;
+}
+
+.field {
+  display: block;
+  margin-bottom: 14px;
+}
+
+.field span {
+  display: block;
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+input[type="text"], select {
+  width: 100%;
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 11px 12px;
+  font-size: 14px;
+  font-family: 'IBM Plex Mono', monospace;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+input[type="text"]:focus, select:focus {
+  border-color: var(--accent);
+}
+
+.range-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.range-row .field { flex: 1; margin-bottom: 0; }
+
+.range-arrow {
+  color: var(--accent);
+  font-size: 18px;
+  padding-bottom: 12px;
+}
+
+/* PREVIEW PITA: menampilkan semua sheet sebagai segmen, highlight yang terpilih */
+.tape-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 18px 0;
+  padding: 12px;
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  min-height: 20px;
+}
+
+.tape-preview .seg {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid var(--line);
+  white-space: nowrap;
+}
+
+.tape-preview .seg.active {
+  color: #04211D;
+  background: var(--accent);
+  border-color: var(--accent);
+  font-weight: 500;
+}
+
+button.btn {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: transform 0.08s ease, opacity 0.15s ease;
+}
+
+button.btn:active { transform: scale(0.98); }
+button.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btn-primary {
+  background: var(--accent);
+  color: #04211D;
+}
+
+.btn-primary:hover:not(:disabled) { opacity: 0.9; }
+
+.hint {
+  font-size: 12.5px;
+  color: var(--muted);
+  margin: 10px 0 0;
+}
+
+.hint code {
+  font-family: 'IBM Plex Mono', monospace;
+  background: var(--panel-2);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+.status {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  color: var(--text);
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  padding: 10px 18px;
+  border-radius: 999px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.status.show { opacity: 1; }
+.status.error { color: var(--warn); border-color: var(--warn); }
+
+#summaryBox { font-size: 14px; line-height: 1.7; }
+
+#summaryBox .row {
+  display: flex;
+  justify-content: space-between;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+#summaryBox .row span:first-child { color: var(--muted); }
+#summaryBox .row span:last-child { font-family: 'IBM Plex Mono', monospace; }
+
+#summaryBox ul { margin: 6px 0 0; padding-left: 18px; color: var(--muted); font-size: 13px; }
+
+.log-details {
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.log-details summary {
+  cursor: pointer;
+  color: var(--accent);
+}
+
+#logBox {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  color: var(--muted);
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px;
+  margin-top: 10px;
+  max-height: 260px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+}
+
+@media (max-width: 520px) {
+  .range-row { flex-direction: column; align-items: stretch; }
+  .range-arrow { padding-bottom: 0; text-align: center; }
+  h1 { font-size: 27px; }
+}
